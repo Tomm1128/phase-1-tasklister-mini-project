@@ -6,13 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleInput = () => {
     const input = document.getElementById("new-task-description")
     const userInput = input.value
-    console.log(userInput)
+    return userInput
   }
 
   //grab user submission into input field 
   addEventListener("click", (event) => {
     event.preventDefault()
     const userInput = handleInput()
+    const tasks = document.getElementById("tasks")
+    const todo = document.createElement("li")
+    todo.textContent = userInput
+    tasks.append(todo)
   });
 
 });
