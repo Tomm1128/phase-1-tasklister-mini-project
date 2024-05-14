@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // your code here
   // User can type task into input field and click submit
   // User should then see the string provided appear in the DOm after submit
-  btn = document.querySelector('input[type="submit"]') 
+  const submitBtn = document.querySelector('input[type="submit"]') 
 
   const handleInput = () => {
     const input = document.getElementById("new-task-description")
@@ -10,16 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
     return userInput
   }
 
+  const handleDelete = () => {
+    
+  }
+
   //grab user submission into input field 
-  btn.addEventListener("click", (event) => {
+  submitBtn.addEventListener("click", (event) => {
     event.preventDefault()
     const userInput = handleInput()
     const tasks = document.getElementById("tasks")
     const todo = document.createElement("li")
-    todo.textContent = userInput
-    tasks.append(todo)
-  });
+    const deleteBtn = document.createElement("button")
+    deleteBtn.textContent = 'X'
+    todo.textContent = `${userInput} `
+    todo.appendChild(deleteBtn)
+    tasks.appendChild(todo)
+    deleteBtn.addEventListener("click", handleDelete)
+  })
 
 
 
-});
+})
+
