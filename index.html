@@ -12,7 +12,7 @@
     <form id="create-task-form" action="" method="POST">
       <label for="username">Enter User:</label>
       <input type="text" id="username" name="username" placeholder="Enter Username">
-      <label for="new-task-description">Task description:</label>
+      <label for="new-task-description">Task Description:</label>
       <input type="text" id="new-task-description" name="new-task-description" placeholder="description">
       <select id="priority">
         <option value="1">High</option>
@@ -28,6 +28,7 @@
 
     <div id="list">
       <h2>My Todos:</h2>
+      <h3 id="logged-in-user"></h3>
       <button id="sort"> Sort by Priority </button>
       <ul id="tasks">
       </ul>
