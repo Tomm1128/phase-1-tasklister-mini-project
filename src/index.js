@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (username.toLowerCase() !== currentUser.toLowerCase()){
       currentUser = username
       const tasks = document.getElementById("tasks")
-
       tasks.innerHTML = ""
       return currentUser
     } else {
@@ -32,10 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   submitBtn.addEventListener("click", (event) => {
-    //prevents refresh when form is submitted
     event.preventDefault()
 
-    //all declared variables
     const userInput = getUserInput()
     const loggedInUser = handleUserCheck(userInput.username)
     const userSection = document.getElementById("logged-in-user")
@@ -48,12 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskAttributes = document.createElement("p")
     taskAttributes.textContent = `Duration: ${userInput.duration}, Due Date: ${userInput.dueDate}`
     
-    // add event listener to delete button and create todo
     deleteBtn.addEventListener("click", handleDelete)
     deleteBtn.textContent = 'X'
     taskText.textContent = `${userInput["new-task-description"]} `
 
-    //Set the color/priority
     if (priority === "1")
       taskText.style.color = "red"
     else if (priority === "2")
@@ -61,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
     else 
       taskText.style.color = "green"
 
-    //append to DOM
     todo.appendChild(taskText)
     todo.appendChild(deleteBtn)
     todo.appendChild(taskAttributes)
@@ -74,11 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const redArray = []
     const greenArray = []
     const yellowArray = []
-
+    
     arrayOfTasks.forEach((item) => {
-      if (item.style.color === "red"){
+      const spanColor = item.querySelector("span")
+
+      if (spanColor.style.color === "red"){
         redArray.push(item)
-      } else if (item.style.color === "green"){
+      } else if (spanColor.style.color === "green"){
         greenArray.push(item)
       } else {
         yellowArray.push(item)
