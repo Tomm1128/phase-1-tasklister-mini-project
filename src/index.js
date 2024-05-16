@@ -1,35 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
   const submitBtn = document.querySelector('input[type="submit"]') 
   const sortBtn = document.getElementById("sort")
+  let currentUser = "" 
 
   const getUserInput = () => {
-    const input = document.getElementById("new-task-description")
-    const userInput = input.value
+    const taskInput = document.getElementById("new-task-description")
+    let userInput = {}
+    const listInputs = document.querySelectorAll('input[type="text"]')
+    for (const item of listInputs){
+      let key = item.id
+      userInput = {
+        ...userInput,
+        [key]: item.value
+      }
+    }
     return userInput
   }
 
   const handleDelete = (event) => event.target.parentNode.remove()
 
+  const handleUserCheck = (username) => {
+    if (username.toLowerCase() !== currentUser.toLowerCase()){
+      currentUser = username
+      const tasks = document.getElementById("tasks")
+
+      tasks.innerHTML = ""
+      return currentUser
+    } else {
+      return currentUser
+    }
+  }
   
   submitBtn.addEventListener("click", (event) => {
+    //prevents refresh when form is submitted
     event.preventDefault()
+
+    //all declared variables
     const userInput = getUserInput()
+    const loggedInUser = handleUserCheck(userInput.username)
+    const userSection = document.getElementById("logged-in-user")
+    userSection.textContent =`User: ${loggedInUser}`
     const priority = document.getElementById("priority").value
     const tasks = document.getElementById("tasks")
     const todo = document.createElement("li")
+    const taskText = document.createElement("span")
     const deleteBtn = document.createElement("button")
+    const taskAttributes = document.createElement("p")
+    taskAttributes.textContent = `Duration: ${userInput.duration}, Due Date: ${userInput.dueDate}`
+    
+    // add event listener to delete button and create todo
     deleteBtn.addEventListener("click", handleDelete)
     deleteBtn.textContent = 'X'
-    todo.textContent = `${userInput} `
+    taskText.textContent = `${userInput["new-task-description"]} `
 
+    //Set the color/priority
     if (priority === "1")
-      todo.style.color = "red"
+      taskText.style.color = "red"
     else if (priority === "2")
-      todo.style.color = "orange"
+      taskText.style.color = "orange"
     else 
-      todo.style.color = "green"
+      taskText.style.color = "green"
 
+    //append to DOM
+    todo.appendChild(taskText)
     todo.appendChild(deleteBtn)
+    todo.appendChild(taskAttributes)
     tasks.appendChild(todo)
   })
 
@@ -58,6 +93,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sortedTasks.forEach (item => tasks.appendChild(item))
   })
-
 })
-
