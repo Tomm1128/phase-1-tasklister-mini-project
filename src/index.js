@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentUser = "" 
 
   const getUserInput = () => {
-    const taskInput = document.getElementById("new-task-description")
     let userInput = {}
     const listInputs = document.querySelectorAll('input[type="text"]')
     for (const item of listInputs){
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const redArray = []
     const greenArray = []
     const yellowArray = []
-    
+
     arrayOfTasks.forEach((item) => {
       const spanColor = item.querySelector("span")
 
@@ -87,6 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tasks.innerHtml = ""
 
-    sortedTasks.forEach (item => tasks.appendChild(item))
+    sortedTasks.forEach(item => tasks.appendChild(item))
   })
 })
